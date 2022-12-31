@@ -1,0 +1,47 @@
+[workspace]
+resolver = "2"
+
+members = [
+    "soroban-env-host",
+    "soroban-env-guest",
+    "soroban-env-common",
+    "soroban-env-common/tests/no_std",
+    "soroban-env-macros",
+    "soroban-native-sdk-macros",
+    "soroban-test-wasms",
+    "soroban-synth-wasm",
+]
+
+exclude = ["soroban-test-wasms/wasm-workspace"]
+
+[workspace.package]
+version = "0.0.11"
+
+[workspace.dependencies]
+soroban-env-common = { version = "0.0.11", path = "soroban-env-common" }
+soroban-env-guest = { version = "0.0.11", path = "soroban-env-guest" }
+soroban-env-host = { version = "0.0.11", path = "soroban-env-host" }
+soroban-env-macros = { version = "0.0.11", path = "soroban-env-macros" }
+soroban-native-sdk-macros = { version = "0.0.11", path = "soroban-native-sdk-macros" }
+
+[workspace.dependencies.stellar-xdr]
+version = "0.0.11"
+git = "https://github.com/stellar/rs-stellar-xdr"
+rev = "dbf2aba"
+default-features = false
+
+[workspace.dependencies.wasmi]
+package = "soroban-wasmi"
+version = "0.16.0-soroban2"
+git = "https://github.com/stellar/wasmi"
+rev = "862b32f5"
+
+# [patch."https://github.com/stellar/rs-stellar-xdr"]
+# stellar-xdr = { path = "../rs-stellar-xdr/" }
+# [patch."https://github.com/stellar/wasmi"]
+# soroban-wasmi = { path = "../wasmi/wasmi_v1/" }
+# soroban-wasmi_core = { path = "../wasmi/core/" }
+
+[profile.release]
+codegen-units = 1
+lto = true
